@@ -53,10 +53,25 @@ func TestMediaSearchMC(t *testing.T) {
     }
 
   })
-/*
+
+  t.Run("Pull the title of the first song", func(t *testing.T) {
+    client := New(casaplayerEndpoint)
+    resp, err := client.MediaSearchMC(media_collection, search_text)
+
+    if err != nil {
+      t.Fatal(err)
+    }
+
+    if resp.MediaItems[0].Title != "Luft Baloons" {
+      t.Fatal("Title of first MediaItem is not 'Luft Baloons'")
+    } else {
+      t.Log("Found 'Luft Baloons' as first MediaItem")
+    }
+  })
+
   t.Run("Nonexistant endpoint", func(t *testing.T) {
     client := New("http://unresolvable:456")
-    _, err := client.NowPlaying("0")
+    _, err := client.MediaSearchMC(media_collection, search_text)
 
     if err != nil {
       t.Log("Received error on nonexistant endpoint")
@@ -67,7 +82,7 @@ func TestMediaSearchMC(t *testing.T) {
 
   t.Run("Invalid URI", func(t *testing.T) {
     client := New("GarbageText")
-    _, err := client.NowPlaying("0")
+    _, err := client.MediaSearchMC(media_collection, search_text)
 
     if err != nil {
       t.Log("Invalid URI rejected.")
@@ -78,9 +93,9 @@ func TestMediaSearchMC(t *testing.T) {
 
   t.Run("HTTP 503 Response Code", func(t *testing.T) {
     client := New(casaplayerEndpoint)
-    np.status = http.StatusServiceUnavailable
+    msmc.status = http.StatusServiceUnavailable
 
-    _, err := client.NowPlaying(casaSource)
+    _, err := client.MediaSearchMC(media_collection, search_text)
 
     if err != nil {
       t.Log("[503] Error received.")
@@ -88,5 +103,4 @@ func TestMediaSearchMC(t *testing.T) {
       t.Fatal(err)
     }
   })
-  */
 }
