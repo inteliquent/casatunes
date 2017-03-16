@@ -10,7 +10,8 @@ import (
 )
 
 func (client *Client) MediaSourcesPlayMedia(source string, mediaId string) (*RESTResultInteger, error) {
-  endpoint := client.config.endpoint + "/media/sources/" + source + "/play/" + mediaId
+  // Hard-coded to "Add Items to Queue and start playing the first newly added item"
+  endpoint := client.config.endpoint + "/media/sources/" + source + "/play/" + mediaId + "?addToQueue=addplay"
   // Validate URL
   _, err := url.ParseRequestURI(endpoint)
 
