@@ -24,7 +24,7 @@ func (msh *mediaSearchMCHandler) handler(w http.ResponseWriter, r *http.Request)
   w.Write([]byte(msh.response))
 }
 
-// casatunes.NowPlaying should return object casatunes.RESTNowPlayingMediaItem
+// casatunes.MediaSearchMC should return object casatunes.RESTMediaCollectionItem
 // from casaplayerEndpoint
 func TestMediaSearchMC(t *testing.T) {
   once.Do(startServer)
@@ -47,9 +47,9 @@ func TestMediaSearchMC(t *testing.T) {
     }
 
     if reflect.TypeOf(resp) != reflect.TypeOf(&RESTMediaCollectionItem{}) {
-      t.Fatal("NowPlaying did not return object of type casatunes.RESTNowPlayingMediaItem !")
+      t.Fatal("MediaSearchMC did not return object of type casatunes.RESTMediaCollectionItem !")
     } else {
-      t.Log("NowPlaying returned casatunes.RESTNowPlayingMediaItem object")
+      t.Log("MediaSearchMC returned casatunes.RESTMediaCollectionItem object")
     }
 
   })
@@ -87,7 +87,7 @@ func TestMediaSearchMC(t *testing.T) {
     if err != nil {
       t.Log("Invalid URI rejected.")
     } else {
-      t.Fatal("NowPlaying accepted casatunes.Client with bad URI !")
+      t.Fatal("MediaSearchMC accepted casatunes.Client with bad URI !")
     }
   })
 
