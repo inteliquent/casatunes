@@ -52,3 +52,7 @@ type RESTMediaCollectionItem struct {
   MediaItems []RESTMediaItem
   ContextMenuItems []RESTContextMenuItem
 }
+
+type RESTResultInteger struct {
+  Result int
+}
