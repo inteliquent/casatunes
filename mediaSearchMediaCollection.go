@@ -10,7 +10,10 @@ import (
 )
 
 func (client *Client) MediaSearchMC(mcId string, searchText string) (*RESTMediaCollectionItem, error) {
-  endpoint := client.config.endpoint + "/media/search/" + mcId + "/" + searchText
+  endpoint := client.config.endpoint + "/media/search/" +
+    url.PathEscape(mcId) + "/" +
+    url.PathEscape(searchText)
+
   // Validate URL
   _, err := url.ParseRequestURI(endpoint)
 

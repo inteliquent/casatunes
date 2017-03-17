@@ -10,7 +10,9 @@ import (
 
 func (client *Client) SourcesPlayerAction(source string, playerAction string) (error) {
   action := strings.ToLower(playerAction)
-  endpoint := client.config.endpoint + "/sources/" + source + "/player/" + action
+  endpoint := client.config.endpoint + "/sources/" +
+    url.PathEscape(source) + "/player/" +
+    url.PathEscape(action)
   // Validate URL
   _, err := url.ParseRequestURI(endpoint)
 

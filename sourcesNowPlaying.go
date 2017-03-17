@@ -35,7 +35,8 @@ type RESTNowPlayingMediaItem struct {
 
 // Access the /sources/{id}/nowplaying API and return *RESTNowPlayingMediaItem
 func (client *Client) NowPlaying(source string) (*RESTNowPlayingMediaItem, error) {
-  endpoint := client.config.endpoint + "/sources/" + source + "/nowplaying"
+  endpoint := client.config.endpoint + "/sources/" +
+    url.PathEscape(source) + "/nowplaying"
   // Validate URL
   _, err := url.ParseRequestURI(endpoint)
 
@@ -49,7 +50,7 @@ func (client *Client) NowPlaying(source string) (*RESTNowPlayingMediaItem, error
   if err != nil {
     return nil, err
   }
-  
+
   if resp.StatusCode != http.StatusOK {
     err := errors.New(fmt.Sprintf("Received HTTP status code [%d]", resp.StatusCode))
     return nil, err
