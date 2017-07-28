@@ -22,7 +22,7 @@ func (client *Client) SourcesPlayerAction(source string, playerAction string) (e
 
   // Validate player action
   switch action {
-  case "play", "pause", "next", "previous":
+  case "play", "pause", "next", "previous", "stop":
     // Do nothing, because these actions are all valid
   default:
     // return an error if a player action isn't supported.
