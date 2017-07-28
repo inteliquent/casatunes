@@ -40,7 +40,7 @@ func TestMediaSourcesPlayMedia(t *testing.T) {
 
   t.Run("Valid object returned", func(t *testing.T) {
     client := New(casaplayerEndpoint)
-    resp, err := client.MediaSourcesPlayMedia(source, mediaId)
+    resp, err := client.MediaSourcesPlayMedia(source, mediaId, "")
 
     if err != nil {
       t.Fatal(err)
@@ -56,7 +56,7 @@ func TestMediaSourcesPlayMedia(t *testing.T) {
 
   t.Run("Nonexistant endpoint", func(t *testing.T) {
     client := New("http://unresolvable:456")
-    _, err := client.MediaSourcesPlayMedia(source, mediaId)
+    _, err := client.MediaSourcesPlayMedia(source, mediaId, "")
 
     if err != nil {
       t.Log("Received error on nonexistant endpoint")
@@ -67,7 +67,7 @@ func TestMediaSourcesPlayMedia(t *testing.T) {
 
   t.Run("Invalid URI", func(t *testing.T) {
     client := New("GarbageText")
-    _, err := client.MediaSourcesPlayMedia(source, mediaId)
+    _, err := client.MediaSourcesPlayMedia(source, mediaId, "")
 
     if err != nil {
       t.Log("Invalid URI rejected.")
@@ -80,7 +80,7 @@ func TestMediaSourcesPlayMedia(t *testing.T) {
     client := New(casaplayerEndpoint)
     mspm.status = http.StatusServiceUnavailable
 
-    _, err := client.MediaSourcesPlayMedia(source, mediaId)
+    _, err := client.MediaSourcesPlayMedia(source, mediaId, "")
 
     if err != nil {
       t.Log("[503] Error received.")
